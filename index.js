@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
-import { connectDB } from "../db/db.js";              // ✅ FIX
-import registerRouter from "../Router/registerRouter.js"; // ✅ FIX
+import { connectDB } from "../db/db.js";              
+import registerRouter from "../Router/registerRouter.js"; 
 
 dotenv.config();
 
