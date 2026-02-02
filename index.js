@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
-import { connectDB } from "./db/db.js";
-import registerRouter from "./Router/registerRouter.js";
+import { connectDB } from "../db/db.js";              // ✅ FIX
+import registerRouter from "../Router/registerRouter.js"; // ✅ FIX
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ app.use(morgan("dev"));
 
 connectDB();
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Backend running 🚀");
 });
 
