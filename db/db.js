@@ -13,11 +13,6 @@ dotenv.config()
    
   }
   catch(err)
-  { 
-    return res.status(500).json({
-            message: err.message,
-            success: false,
-            error: true
-        })}
+  {  console.log(err)}
   }
                                    
