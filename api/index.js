@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
-import { connectDB } from "./db/db.js";
-import registerRouter from "./Router/registerRouter.js";
+import { connectDB } from "../db/db.js";
+import registerRouter from "../Router/registerRouter.js";
 
 dotenv.config();
 
@@ -21,8 +21,4 @@ app.get("/", (req, res) => {
 
 app.use("/api/user", registerRouter);
 
-const PORT = process.env.PORT || 8080;
-
-app.listen(PORT, () => {
-  console.log("Server running on", PORT);
-});
+export default app;
