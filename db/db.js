@@ -1,25 +1,18 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv"
+dotenv.config()
 
-let cached = global.mongoose;
 
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
 
-export async function connectDB() {
-  if (cached.conn) return cached.conn;
 
-  if (!process.env.MONGO_URI) {
-    throw new Error("❌ MONGO_URI not defined in Vercel env");
+ export const connectDB =async()=>{
+    
+  try{
+   await mongoose.connect(process.env.MONGO_URL)
+    console.log("db connected")
+   
   }
-
-  if (!cached.promise) {
-    cached.promise = mongoose.connect(process.env.MONGO_URI, {
-      bufferCommands: false,
-    });
+  catch(err)
+  {  console.log(err)}
   }
-
-  cached.conn = await cached.promise;
-  return cached.conn;
-}
-                          
+                                   
