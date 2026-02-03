@@ -1,24 +1,18 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import morgan from "morgan";
-import { connectDB } from "../db/db.js";              
-import registerRouter from "../Router/registerRouter.js"; 
+import { connectDB } from "../db/db.js";
 
-dotenv.config();
+export default async function handler(req, res) {
+  try {
+    await connectDB();
 
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-app.use(morgan("dev"));
-
-connectDB();
-
-app.get("/api", (req, res) => {
-  res.send("Backend running 🚀");
-});
-
-app.use("/api/user", registerRouter);
-
-export default app;
+    return res.status(200).json({
+      success: true,
+      message: "✅ API & DB both working",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
