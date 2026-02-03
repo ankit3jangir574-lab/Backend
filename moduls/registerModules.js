@@ -10,6 +10,6 @@ const registerSchema = new mongoose.Schema({
         type:String,
         required:true
     }
-},{Timestamp:true})
+},{ timestamps: true,})
 
 export const registerModules = mongoose.model("register",registerSchema)

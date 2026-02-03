@@ -2,8 +2,9 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
-import { connectDB } from "../db/db.js";              
-import registerRouter from "../Router/registerRouter.js"; 
+import serverless from "serverless-http";
+import { connectDB } from "../db/db.js";
+import registerRouter from "../Router/registerRouter.js";
 
 dotenv.config();
 
@@ -21,4 +22,4 @@ app.get("/api", (req, res) => {
 
 app.use("/api/user", registerRouter);
 
-export default app;
+export default serverless(app);
