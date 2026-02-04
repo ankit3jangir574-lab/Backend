@@ -12,16 +12,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// DB connect
-connectDB();
+// DB connect (sirf once)
+await connectDB();
 
-// test route
+// health check
 app.get("/", (req, res) => {
-  res.send("Backend running 🚀");
+  res.json({ message: "Backend running 🚀" });
 });
 
-// API routes
+// routes
 app.use("/api", registerRouter);
 
-// ❗ VERY IMPORTANT
+// ❗ THIS IS MUST
 export default serverless(app);
