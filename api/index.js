@@ -12,8 +12,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// DB connect (sirf once)
-await connectDB();
+// ✅ YAHI CHANGE HAI
+connectDB()
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.error("DB Error:", err));
 
 // health check
 app.get("/", (req, res) => {
@@ -23,5 +25,5 @@ app.get("/", (req, res) => {
 // routes
 app.use("/api", registerRouter);
 
-// ❗ THIS IS MUST
+// must export
 export default serverless(app);
