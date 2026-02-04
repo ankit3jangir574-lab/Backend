@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs"
 
 export const register = async (req, res) => {
 
-    try {
+    try { 
         const { username, password } = req.body
         console.log(req.body)
         if (!username || !password) {
