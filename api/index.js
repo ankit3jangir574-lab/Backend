@@ -1,23 +1,27 @@
 import express from "express";
 import cors from "cors";
-import morgan from "morgan";
+import dotenv from "dotenv";
 import serverless from "serverless-http";
-import { connectDB } from "../db/db.js";
-import registerRouter from "../Router/registerRouter.js";
+import connectDB from "../db/db.js";
+import registerRouter from "../routes/registerRoute.js";
+
+dotenv.config();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(morgan("dev"));
 
+// DB connect
+connectDB();
 
-await connectDB();
-
-app.get("/api", (req, res) => {
+// test route
+app.get("/", (req, res) => {
   res.send("Backend running 🚀");
 });
 
-app.use("/api/user", registerRouter);
+// API routes
+app.use("/api", registerRouter);
 
+// ❗ VERY IMPORTANT
 export default serverless(app);
