@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-
-// ✅ Load env ONLY for local
 if (process.env.NODE_ENV !== "production") {
   dotenv.config();
 }

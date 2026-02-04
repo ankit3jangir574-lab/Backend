@@ -11,7 +11,6 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
-// ✅ Connect DB once (cached in db.js)
 await connectDB();
 
 app.get("/api", (req, res) => {
