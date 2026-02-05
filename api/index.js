@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import serverless from "serverless-http";
 import connectDB from "../db/db.js";
 import registerRouter from "../Router/registerRouter.js";
 
@@ -21,4 +20,4 @@ app.get("/", (req, res) => {
 
 app.use("/api", registerRouter);
 
-export default serverless(app);
+export default app;
