@@ -1,27 +1,17 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-if (process.env.NODE_ENV !== "production") {
-  dotenv.config();
-}
 
-let cached = global.mongoose;
+let isConnected = false;
 
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
+const connectDB = async () => {
+  if (isConnected) return;
 
-export const connectDB = async () => {
-  if (cached.conn) return cached.conn;
-
-  if (!cached.promise) {
-    if (!process.env.MONGO_URL) {
-      throw new Error("❌ MONGO_URL is not defined");
-    }
-
-    cached.promise = mongoose.connect(process.env.MONGO_URL);
+  if (!process.env.MONGO_URI) {
+    throw new Error("MONGO_URI missing");
   }
 
-  cached.conn = await cached.promise;
-  console.log("MongoDB connected");
-  return cached.conn;
+  const db = await mongoose.connect(process.env.MONGO_URI);
+  isConnected = db.connections[0].readyState;
 };
+
+export default connectDB;
+

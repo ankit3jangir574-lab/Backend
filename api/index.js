@@ -12,26 +12,19 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ⚠️ IMPORTANT: DB connect inside handler-safe way
-let isConnected = false;
-async function dbConnectOnce() {
-  if (!isConnected) {
+// ✅ test route
+app.get("/", async (req, res) => {
+  try {
     await connectDB();
-    isConnected = true;
-    console.log("MongoDB connected");
+    res.json({ message: "Backend live 🚀 DB connected" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "DB connection failed" });
   }
-}
-app.use(async (req, res, next) => {
-  await dbConnectOnce();
-  next();
-});
-
-// test route
-app.get("/api/test", (req, res) => {
-  res.json({ message: "API working 🚀" });
 });
 
 // routes
 app.use("/api", registerRouter);
 
+// ❗ important
 export default serverless(app);
