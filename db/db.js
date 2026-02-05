@@ -1,17 +1,16 @@
 import mongoose from "mongoose";
-
-let isConnected = false;
+import dotenv from "dotenv"
 
 const connectDB = async () => {
-  if (isConnected) return;
-
-  if (!process.env.MONGO_URI) {
-    throw new Error("MONGO_URI missing");
+ 
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("✅ MongoDB connected successfully");
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err.message);
+    // Vercel par process.exit(1) mat lagao, sirf error throw karo
+    throw err;
   }
-
-  const db = await mongoose.connect(process.env.MONGO_URI);
-  isConnected = db.connections[0].readyState;
 };
 
 export default connectDB;
-
