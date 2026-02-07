@@ -6,8 +6,10 @@ import registerRouter from "../Router/registerRouter.js";
 
 dotenv.config();
 const app = express();
+ 
+ const port = 8080;
 
-app.use(cors()); // Global cors allow karein testing ke liye, ya specific URL
+app.use(cors());
 app.use(express.json());
 
 

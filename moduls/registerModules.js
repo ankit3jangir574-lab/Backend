@@ -1,14 +1,9 @@
 import mongoose from "mongoose";
 
-const registerSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    }
-}, { timestamps: true });
+const schema = new mongoose.Schema({
+  email: String,
+  password: String
+});
 
-export const registerModules = mongoose.model("register", registerSchema);
+export const registerModules =
+  mongoose.models.User || mongoose.model("User", schema);
