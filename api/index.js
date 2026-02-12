@@ -1,14 +1,11 @@
 import express from "express";
+import connectDB from "./db.js";
 
 const app = express();
 
-app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Backend running on Vercel ✅"
-  });
+app.get("/", async (req, res) => {
+  await connectDB();
+  res.send("Backend + MongoDB working 🚀");
 });
 
 export default app;
