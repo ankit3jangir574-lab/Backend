@@ -17,7 +17,7 @@ await connectDB();
     
 
 app.get("/", (req, res) => {
-    res.json({ message: "Backend is live on Vercel 🚀" });
+    res.send({ message: "Backend is live on Vercel 🚀" });
 });
 
 app.use("/api", registerRouter);
